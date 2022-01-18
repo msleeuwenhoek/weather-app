@@ -35,17 +35,17 @@
         >
           Search
         </button>
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" id="locationButton">
           Use geolocation
         </button>
       </form>
 
-    </div>
-      <div class="card">
+   
+      <div class="card todaysWeatherCard">
         <div class="row">
-          <div class="col-8">
+          <div class="col">
             <h2>Rotterdam</h2>
-            <div>Sunday December 7th 2021</div>
+            <div id="todaysDate">Sunday December 7th 2021</div>
             <div>Last updated - </div>
             <br/>
             <div>
@@ -54,69 +54,66 @@
             <div>Humidity: <span>0</span>%</div>
             <div>Wind: <span>0</span> km/hour</div>
           </div>
-          <div class="col-4">
+          <div class="col">
             <img src="#" alt="weather icon" />
             <br />
             <div>
-              <span >17 </span>
-              <span>
-                <span >°C</span> | <span >°F</span>
-              </span>
+              <span id="temperatureToday">17 </span>
+                <span id="left-unit" >°C</span> | <span id="right-unit" >°F</span>
             </div>
           </div>
         </div>
       </div>
-
-           <div class="card">
+ <div class="card weeklyWeatherCard">
         <div class="card-body">
           <div class="row">
             <span class="col">
-              <h4>Monday</h4>
+              <div class="weekDay">Monday</div>
               <div >Dec 8</div>
               <img src="#" alt="weather icon">
-              <div >12 °C</div>
-              <div>💧 8%</div>
+              <div >0 °C</div>
+              <div>💧 0%</div>
             </span>
             <span class="col">
-              <h4>Tuesday</h4>
+              <div class="weekDay">Tuesday</div>
               <div >Dec 9</div>
               <img src="#" alt="weather icon">
-              <div >10 °C</div>
-              <div >💧 24%</div>
+              <div >0 °C</div>
+              <div >💧 0%</div>
             </span>
             <span class="col">
-              <h4>Wednesday</h4>
+              <div class="weekDay">Wednesday</div>
               <div >Dec 10</div>
               <img src="#" alt="weather icon">
-              <div >11 °C</div>
-              <div >💧 35%</div>
+              <div >0 °C</div>
+              <div >💧 0%</div>
             </span>
             <span class="col">
-              <h4>Thursday</h4>
+              <div class="weekDay">Thursday</div>
               <div >Dec 11</div>
               <img src="#" alt="weather icon">
-              <div >11 °C</div>
-              <div>💧 12%</div>
+              <div >0 °C</div>
+              <div>💧 0%</div>
             </span>
             <span class="col">
-              <h4>Friday</h4>
+              <div class="weekDay">Friday</div>
               <div >Dec 12</div>
               <img src="#" alt="weather icon">
-              <div>17 °C</div>
-              <div >💧 5%</div>
+              <div>0 °C</div>
+              <div >💧 0%</div>
             </span>
           </div>
         </div>
       </div>
     </div>
 
-    <div >
-      <a href=""
+    <div class="credits">
+      <a href="https://github.com/msleeuwenhoek/weather-app" target="_blank"
         >Open-source code</a
       >
       by Merel Sleeuwenhoek
     </div>
-
+ </div>
     <script src="app.js"></script>
   </body>
 </html>
