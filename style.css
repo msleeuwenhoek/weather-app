@@ -15,7 +15,7 @@ h3 {
 
 #form-control,
 .search-button,
-#locationButton {
+#location-button {
   display: inline;
   margin: 0.5%;
 }
@@ -25,7 +25,7 @@ h3 {
 }
 
 .search-button,
-#locationButton {
+#location-button {
   width: 17.5%;
   height: 60px;
 }
@@ -37,12 +37,12 @@ h3 {
 .todaysWeatherCard .col {
   padding: 20px 50px;
 }
-#todaysDate {
+#todays-date {
   font-size: 20px;
   font-weight: 500;
 }
 
-#temperatureToday,
+#temperature-today,
 #left-unit {
   font-size: 60px;
 }

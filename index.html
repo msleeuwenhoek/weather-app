@@ -35,7 +35,7 @@
         >
           Search
         </button>
-        <button type="button" class="btn btn-primary" id="locationButton">
+        <button type="button" class="btn btn-primary" id="location-button">
           Use geolocation
         </button>
       </form>
@@ -44,21 +44,21 @@
       <div class="card todaysWeatherCard">
         <div class="row">
           <div class="col">
-            <h2>Rotterdam</h2>
-            <div id="todaysDate">Sunday December 7th 2021</div>
-            <div>Last updated - </div>
+            <h2 id="city-heading">Rotterdam</h2>
+            <div id="todays-date">Sunday December 7th 2021</div>
+            <div id="time-update">Last updated - </div>
             <br/>
-            <div>
+            <div id="weather-description">
               Today's weather is cold and cloudy
             </div>
-            <div>Humidity: <span>0</span>%</div>
-            <div>Wind: <span>0</span> km/hour</div>
+            <div >Humidity: <span id="humidity">0</span>%</div>
+            <div >Wind: <span id="wind">0</span> km/hour</div>
           </div>
           <div class="col">
-            <img src="#" alt="weather icon" />
+            <img id="todays-icon" src="#" alt="weather icon" />
             <br />
             <div>
-              <span id="temperatureToday">17 </span>
+              <span id="temperature-today">17 </span>
                 <span id="left-unit" >°C</span> | <span id="right-unit" >°F</span>
             </div>
           </div>
