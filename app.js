@@ -47,6 +47,7 @@ function updateTemperature(response) {
 }
 
 function updateWeather(response) {
+  resetToCelsius();
   updateTime();
   adjustDate();
   let humidity = response.data.main.humidity;
@@ -70,13 +71,16 @@ function getWeatherData(city, units) {
     units = "metric";
   }
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  let weatherData = axios.get(apiUrl);
+  let weatherData = axios.get(apiUrl).catch((error) => {
+    alert("Sorry, we couldn't find that city. Please try again!");
+    throw error;
+  });
+
   return weatherData;
 }
 
 function handleSubmit(event) {
   event.preventDefault();
-  resetToCelsius();
   let city = document.querySelector(".form-control").value.trim();
   getWeatherData(city).then(updateWeather);
 }
@@ -87,7 +91,7 @@ function updateLocation(position) {
   let apiKey = "3a3fb11a6316d75f69f5016b49163029";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  resetToCelsius();
+
   axios.get(apiUrl).then(updateWeather);
 }
 function getLocation() {
