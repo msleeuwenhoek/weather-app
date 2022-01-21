@@ -19,7 +19,7 @@ function adjustDate() {
     "May",
     "June",
     "July",
-    "Agustus",
+    "Augustus",
     "September",
     "October",
     "November",
@@ -41,6 +41,21 @@ function updateTime(response) {
   ).innerHTML = `Last updated - ${timeHours}:${timeMinutes}`;
 }
 
+function formatDay(dt) {
+  let date = new Date(dt * 1000);
+  let weekDay = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[weekDay];
+}
+
 function updateWeather(response) {
   updateTime(response);
   adjustDate();
@@ -58,6 +73,7 @@ function updateWeather(response) {
   document.getElementById(
     "todays-icon"
   ).src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
+  getForecast(response.data.coord);
 }
 
 function getWeatherData(city) {
@@ -68,7 +84,6 @@ function getWeatherData(city) {
     alert("Sorry, we couldn't find that city. Please try again!");
     throw error;
   });
-
   return weatherData;
 }
 
@@ -87,13 +102,48 @@ function updateLocation(position) {
 
   axios.get(apiUrl).then(updateWeather);
 }
+
 function getLocation() {
   navigator.geolocation.getCurrentPosition(updateLocation);
 }
 
-getWeatherData("Rotterdam").then(updateWeather);
+function createForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector(".card-body");
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    console.log(forecastDay);
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<span class="col">
+          <div class="weekDay">${formatDay(forecastDay.dt)}</div>
+          <img src=https://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png alt="weather icon">
+          <div> ${forecastDay.weather[0].main}</div>
+          <span>${Math.round(forecastDay.temp.max)}°C </span><span>${Math.round(
+          forecastDay.temp.min
+        )}°C </span>
+          <div>💧 ${forecastDay.humidity}%</div>
+          <div> ${Math.round(forecastDay.wind_speed)} m/sec</div>
+         </span>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coords) {
+  let apiKey = "3a3fb11a6316d75f69f5016b49163029";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(createForecast);
+}
 
 let searchForm = document.querySelector("#search-section");
 searchForm.addEventListener("submit", handleSubmit);
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", getLocation);
+
+getWeatherData("Rotterdam").then(updateWeather);
