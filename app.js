@@ -41,21 +41,16 @@ function updateTime() {
   ).innerHTML = `Last updated - ${timeHours}:${timeMinutes}`;
 }
 
-function updateTemperature(response) {
-  let temperature = Math.round(response.data.main.temp);
-  document.querySelector("#temperature-today").innerHTML = temperature;
-}
-
 function updateWeather(response) {
-  resetToCelsius();
   updateTime();
   adjustDate();
   let humidity = response.data.main.humidity;
   let wind = Math.round(response.data.wind.speed);
   let iconId = response.data.weather[0].icon;
-  let weatherDescription = response.data.weather[0].main;
+  let weatherDescription = response.data.weather[0].description;
   let city = response.data.name;
-  updateTemperature(response);
+  let temperature = Math.round(response.data.main.temp);
+  document.querySelector("#temperature-today").innerHTML = temperature;
   document.querySelector("#city-heading").innerHTML = city;
   document.querySelector("#weather-description").innerHTML = weatherDescription;
   document.querySelector("#humidity").innerHTML = humidity;
@@ -65,11 +60,9 @@ function updateWeather(response) {
   ).src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
 }
 
-function getWeatherData(city, units) {
+function getWeatherData(city) {
   let apiKey = "3a3fb11a6316d75f69f5016b49163029";
-  if (units === undefined) {
-    units = "metric";
-  }
+  let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   let weatherData = axios.get(apiUrl).catch((error) => {
     alert("Sorry, we couldn't find that city. Please try again!");
@@ -98,30 +91,6 @@ function getLocation() {
   navigator.geolocation.getCurrentPosition(updateLocation);
 }
 
-function resetToCelsius() {
-  isMetric = true;
-  let rightUnit = document.querySelector("#right-unit");
-  rightUnit.innerHTML = "°F";
-  let leftUnit = document.querySelector("#left-unit");
-  leftUnit.innerHTML = "°C";
-}
-function changeToCelsius() {
-  resetToCelsius();
-  let temperatureHeading = document.querySelector("#temperature-today");
-  let temperature = temperatureHeading.textContent;
-  temperatureHeading.innerHTML = Math.round((temperature - 32) * 0.5556);
-}
-function changeToFahrenheit() {
-  isMetric = false;
-  let rightUnit = document.querySelector("#right-unit");
-  rightUnit.innerHTML = "°C";
-  let leftUnit = document.querySelector("#left-unit");
-  leftUnit.innerHTML = "°F";
-  let temperatureHeading = document.querySelector("#temperature-today");
-  let temperature = temperatureHeading.textContent;
-  temperatureHeading.innerHTML = Math.round(temperature * 1.8 + 32);
-}
-
 getWeatherData("Rotterdam").then(updateWeather);
 let isMetric = true;
 
@@ -129,12 +98,3 @@ let searchForm = document.querySelector("#search-section");
 searchForm.addEventListener("submit", handleSubmit);
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", getLocation);
-
-let unitsButton = document.querySelector("#right-unit");
-unitsButton.addEventListener("click", function () {
-  if (isMetric) {
-    changeToFahrenheit();
-  } else {
-    changeToCelsius();
-  }
-});
