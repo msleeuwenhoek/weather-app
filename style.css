@@ -1,14 +1,26 @@
+body {
+  color: white;
+  background-image: url("src/mountain-background2.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 h1 {
   text-align: center;
   padding: 20px 0;
 }
+h2 {
+  margin: 0;
+}
+
 h3 {
   font-size: 10px;
 }
 .container {
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  margin: 30px auto;
-  opacity: 0.8;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.527);
+  margin: 50px auto;
+
   max-width: 800px;
   padding: 30px;
 }
@@ -17,7 +29,8 @@ h3 {
 .search-button,
 #location-button {
   display: inline;
-  margin: 0.5%;
+  margin: 0.8%;
+  margin-top: 20px;
 }
 
 #form-control {
@@ -26,31 +39,52 @@ h3 {
 
 .search-button,
 #location-button {
-  width: 17.5%;
-  height: 60px;
+  width: 13%;
+  height: 40px;
+  font-size: 22px;
+  font-weight: 200;
+  background-color: #b488da;
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
+.search-button:hover,
+#location-button:hover {
+  background-color: #dcb1e7;
+  border: none;
+}
 .card {
   margin: 30px 0;
 }
+.todaysWeatherCard {
+  padding-top: 60px;
+  font-weight: 600;
+  text-align: center;
+  margin: 40px;
+  vertical-align: middle;
+  line-height: 35px;
+}
 
-.todaysWeatherCard .col {
-  padding: 20px 50px;
+#city-heading {
+  font-size: 30px;
 }
 #todays-date {
   font-size: 20px;
   font-weight: 500;
 }
 
+#todays-icon {
+  margin-top: -30px;
+}
+
 .temperatureHeading {
-  font-size: 60px;
+  font-size: 50px;
 }
-
-#right-unit {
-  font-size: 24px;
-  cursor: pointer;
+.weeklyWeatherCard {
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 20px;
 }
-
 .weeklyWeatherCard .col {
   text-align: center;
   padding: 10px;
@@ -59,8 +93,14 @@ h3 {
   font-weight: 700;
 }
 
+.minTemp {
+  opacity: 0.6;
+}
+.maxTemp {
+  font-weight: bold;
+}
+
 .credits {
-  opacity: 0.8;
   text-align: center;
   padding-bottom: 25px;
 }

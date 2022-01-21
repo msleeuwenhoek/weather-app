@@ -27,8 +27,7 @@ function adjustDate() {
   ];
   let month = months[todaysDate.getMonth()];
   let date = todaysDate.getDate();
-  let year = todaysDate.getFullYear();
-  dateHeading.innerHTML = `${day}, ${month} ${date}, ${year}`;
+  dateHeading.innerHTML = `${day}, ${month} ${date}`;
 }
 
 function updateTime(response) {
@@ -109,7 +108,7 @@ function getLocation() {
 
 function createForecast(response) {
   let forecast = response.data.daily;
-  let forecastElement = document.querySelector(".card-body");
+  let forecastElement = document.querySelector(".weeklyWeatherCard");
   let forecastHTML = `<div class="row">`;
 
   forecast.forEach(function (forecastDay, index) {
@@ -123,12 +122,13 @@ function createForecast(response) {
             forecastDay.weather[0].icon
           }@2x.png alt="weather icon">
           <div> ${forecastDay.weather[0].main}</div>
-          <span>${Math.round(forecastDay.temp.max)}°C </span><span>${Math.round(
+          <span class="maxTemp">${Math.round(
+            forecastDay.temp.max
+          )}°C </span><span class = "minTemp">${Math.round(
           forecastDay.temp.min
         )}°C </span>
-          <div>💧 ${forecastDay.humidity}%</div>
-          <div> ${Math.round(forecastDay.wind_speed)} m/sec</div>
-         </span>`;
+          <div><i class="fas fa-tint"></i> ${forecastDay.humidity}%</div>
+        </span>`;
     }
   });
   forecastHTML = forecastHTML + `</div>`;
