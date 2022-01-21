@@ -31,8 +31,8 @@ function adjustDate() {
   dateHeading.innerHTML = `${day}, ${month} ${date}, ${year}`;
 }
 
-function updateTime() {
-  let todaysDate = new Date();
+function updateTime(response) {
+  let todaysDate = new Date(response.data.dt * 1000);
   let timeHours = ("0" + todaysDate.getHours()).slice(-2);
   let timeMinutes = ("0" + todaysDate.getMinutes()).slice(-2);
 
@@ -42,7 +42,7 @@ function updateTime() {
 }
 
 function updateWeather(response) {
-  updateTime();
+  updateTime(response);
   adjustDate();
   let humidity = response.data.main.humidity;
   let wind = Math.round(response.data.wind.speed);
@@ -92,7 +92,6 @@ function getLocation() {
 }
 
 getWeatherData("Rotterdam").then(updateWeather);
-let isMetric = true;
 
 let searchForm = document.querySelector("#search-section");
 searchForm.addEventListener("submit", handleSubmit);
